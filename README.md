@@ -8,7 +8,7 @@ A sleek and interactive web-based AI Assistant built with HTML, CSS, and JavaScr
 ![Tailwind](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![Responsive](https://img.shields.io/badge/Responsive-Yes-brightgreen?style=for-the-badge)
 
-> ⚠️ **Note:** This project requires an AI API key for real-time interaction. Default implementation uses sample responses for demo purposes.
+> ⚠️ **Note:** This project requires an AI API key for real-time interaction. Default implementation uses sample responses for demo purposes. 
 
 ## 🎯 Features
 
