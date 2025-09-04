@@ -12,7 +12,7 @@ A sleek and interactive web-based AI Assistant built with HTML, CSS, and JavaScr
 
 ## 🎯 Features
 
-- **Interactive Chat Interface** – Clean and intuitive user experience   
+- **Interactive Chat Interface** – Clean and intuitive user experience    
 - **Quick Prompts** – Easily ask common questions with a single click  
 - **Modern UI** – Smooth animations and modern layout  
 - **Responsive Design** – Works perfectly on desktop, tablet, and mobile  
