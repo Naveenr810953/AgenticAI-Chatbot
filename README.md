@@ -1,4 +1,4 @@
- # 🤖 AI Assistant
+  # 🤖 AI Assistant
 
 A sleek and interactive web-based AI Assistant built with HTML, CSS, and JavaScript. Control the conversation with a user-friendly chat interface, featuring quick prompts, smooth animations, and a responsive design!
 
