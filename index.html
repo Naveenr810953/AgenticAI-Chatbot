@@ -6,57 +6,340 @@
     <title>AI Assistant</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chat-container {
+            flex: 1;
+            padding: 16px;
+            overflow-y: auto;
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .user-message, .ai-message {
+            max-width: 80%;
+            padding: 14px 18px;
+            border-radius: 18px;
+            margin-bottom: 16px;
+            position: relative;
+            animation: fadeIn 0.3s ease-out;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            line-height: 1.5;
+        }
+        
+        .user-message {
+            background: #0066ff;
+            color: white;
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+        }
+        
+        .ai-message {
+            background: white;
+            color: #333;
+            margin-right: auto;
+            border-bottom-left-radius: 5px;
+        }
+        
+        .message-content {
+            white-space: pre-wrap;
+        }
+        
+        .prompt-box {
+            background: white;
+            padding: 16px;
+            border-top: 1px solid #e5e7eb;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .input-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+        }
+        
+        #userInput {
+            flex: 1;
+            padding: 14px 20px;
+            border: 1px solid #e5e7eb;
+            border-radius: 24px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s;
+            background: #f9fafb;
+        }
+        
+        #userInput:focus {
+            background: white;
+            border-color: #0066ff;
+            box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.2);
+        }
+        
+        #sendBtn {
+            background: #0066ff;
+            color: white;
+            border: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        #sendBtn:hover {
+            background: #0052cc;
+            transform: scale(1.05);
+        }
+        
+        #sendBtn:active {
+            transform: scale(0.95);
+        }
+        
+        .quick-prompt {
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        
+        .quick-prompt:hover {
+            background: #f1f5f9 !important;
+            transform: translateX(4px);
+        }
+        
+        .typing-indicator {
+            display: inline-flex;
+            align-items: center;
+            background: white;
+            padding: 14px 18px;
+            border-radius: 18px;
+            margin-bottom: 16px;
+            border-bottom-left-radius: 5px;
+        }
+        
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: #666;
+            border-radius: 50%;
+            margin: 0 2px;
+            animation: typingAnimation 1.4s infinite ease-in-out;
+        }
+        
+        .typing-dot:nth-child(1) { animation-delay: 0s; }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        
+        @keyframes typingAnimation {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-5px); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .header-icon {
+            background: linear-gradient(135deg, #0066ff 0%, #0052cc 100%);
+        }
+        
+        .timestamp {
+            font-size: 12px;
+            color: #888;
+            margin-top: 6px;
+            text-align: right;
+        }
+        
+        .ai-timestamp {
+            text-align: left;
+        }
+        
+        @media (max-width: 768px) {
+            .user-message, .ai-message {
+                max-width: 90%;
+            }
+            
+            .chat-container {
+                padding: 12px;
+            }
+        }
+    </style>
 </head>
-<body class="bg-gray-50 min-h-screen flex flex-col">
+<body>
     <!-- Header -->
-    <header class="bg-white border-b border-gray-200 py-3 px-4 flex items-center">
+    <header class="bg-white border-b border-gray-200 py-4 px-6 flex items-center shadow-sm">
         <div class="flex items-center">
-            <div class="bg-blue-600 text-white p-2 rounded-lg mr-3">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                </svg>
+            <div class="header-icon text-white p-2 rounded-lg mr-3">
+                <i class="fas fa-robot text-lg"></i>
             </div>
-            <h1 class="text-lg font-medium text-gray-900">AI Assistant</h1>
+            <h1 class="text-xl font-medium text-gray-900">AI Assistant</h1>
         </div>
     </header>
 
     <!-- Chat Container -->
-    <div class="chat-container flex-1 p-4">
+    <div class="chat-container">
         <div id="chatMessages">
             <!-- Welcome Message -->
             <div class="ai-message">
-                <h2 class="font-medium text-gray-900">Hello! I'm your AI Assistant</h2>
-                <p class="text-gray-700 mt-1">How can I help you today? Feel free to ask me anything.</p>
-                <div class="mt-4 space-y-3">
-                    <p class="text-sm text-gray-600">Try asking:</p>
-                    <button class="quick-prompt text-left text-blue-600 hover:text-blue-800 text-sm p-2 rounded hover:bg-blue-50 w-full">
-                        "What's the weather like today?"
-                    </button>
-                    <button class="quick-prompt text-left text-blue-600 hover:text-blue-800 text-sm p-2 rounded hover:bg-blue-50 w-full">
-                        "Tell me a fun fact"
-                    </button>
-                    <button class="quick-prompt text-left text-blue-600 hover:text-blue-800 text-sm p-2 rounded hover:bg-blue-50 w-full">
-                        "Explain quantum computing simply"
-                    </button>
+                <div class="message-content">
+                    <h2 class="font-medium text-gray-900">Hello! I'm your AI Assistant</h2>
+                    <p class="text-gray-700 mt-2">How can I help you today? Feel free to ask me anything.</p>
+                    <div class="mt-4 space-y-3">
+                        <p class="text-sm text-gray-600">Try asking:</p>
+                        <button class="quick-prompt text-left text-blue-600 hover:text-blue-800 text-sm p-2 rounded hover:bg-blue-50 w-full transition">
+                            "What's the weather like today?"
+                        </button>
+                        <button class="quick-prompt text-left text-blue-600 hover:text-blue-800 text-sm p-2 rounded hover:bg-blue-50 w-full transition">
+                            "Tell me a fun fact"
+                        </button>
+                        <button class="quick-prompt text-left text-blue-600 hover:text-blue-800 text-sm p-2 rounded hover:bg-blue-50 w-full transition">
+                            "Explain quantum computing simply"
+                        </button>
+                    </div>
                 </div>
+                <div class="timestamp ai-timestamp">Just now</div>
             </div>
         </div>
     </div>
 
     <!-- Input Box -->
     <div class="prompt-box">
-        <div class="flex items-center">
-            <input type="text" id="userInput" placeholder="Type your message here..." 
-                   class="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition text-sm">
-            <button id="sendBtn" class="ml-2 bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                </svg>
+        <div class="input-container">
+            <input type="text" id="userInput" placeholder="Type your message here...">
+            <button id="sendBtn">
+                <i class="fas fa-paper-plane"></i>
             </button>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatMessages = document.getElementById('chatMessages');
+            const userInput = document.getElementById('userInput');
+            const sendBtn = document.getElementById('sendBtn');
+            
+            // Sample responses for demonstration
+            const responses = {
+                "weather": "Currently, it's sunny and 72°F in your area. Perfect weather to get outside!",
+                "fun fact": "Did you know? A group of flamingos is called a 'flamboyance'!",
+                "quantum computing": "Quantum computing uses quantum bits or 'qubits' which can represent both 0 and 1 simultaneously. This allows quantum computers to process complex calculations much faster than traditional computers for specific problems.",
+                "default": "I'm an AI assistant designed to help with various tasks. How can I assist you today?"
+            };
+            
+            // Add event listeners
+            sendBtn.addEventListener('click', sendMessage);
+            userInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+            
+            // Add click events to quick prompts
+            document.querySelectorAll('.quick-prompt').forEach(button => {
+                button.addEventListener('click', function() {
+                    userInput.value = this.textContent.replace(/"/g, '').trim();
+                    sendMessage();
+                });
+            });
+            
+            function sendMessage() {
+                const message = userInput.value.trim();
+                if (message === '') return;
+                
+                // Add user message to chat
+                addMessage(message, 'user');
+                userInput.value = '';
+                
+                // Simulate AI thinking
+                setTimeout(() => {
+                    showTypingIndicator();
+                    
+                    // Simulate response after a short delay
+                    setTimeout(() => {
+                        removeTypingIndicator();
+                        let response = responses.default;
+                        
+                        // Check for specific queries
+                        if (message.toLowerCase().includes('weather')) {
+                            response = responses.weather;
+                        } else if (message.toLowerCase().includes('fun fact')) {
+                            response = responses["fun fact"];
+                        } else if (message.toLowerCase().includes('quantum')) {
+                            response = responses["quantum computing"];
+                        }
+                        
+                        addMessage(response, 'ai');
+                    }, 1500);
+                }, 500);
+            }
+            
+            function addMessage(content, sender) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `${sender}-message`;
+                
+                const messageContent = document.createElement('div');
+                messageContent.className = 'message-content';
+                messageContent.textContent = content;
+                
+                const timestamp = document.createElement('div');
+                timestamp.className = `timestamp ${sender === 'ai' ? 'ai-timestamp' : ''}`;
+                timestamp.textContent = getCurrentTime();
+                
+                messageDiv.appendChild(messageContent);
+                messageDiv.appendChild(timestamp);
+                
+                chatMessages.appendChild(messageDiv);
+                
+                // Scroll to bottom
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+            
+            function showTypingIndicator() {
+                const typingDiv = document.createElement('div');
+                typingDiv.id = 'typingIndicator';
+                typingDiv.className = 'typing-indicator';
+                
+                for (let i = 0; i < 3; i++) {
+                    const dot = document.createElement('div');
+                    dot.className = 'typing-dot';
+                    typingDiv.appendChild(dot);
+                }
+                
+                chatMessages.appendChild(typingDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+            
+            function removeTypingIndicator() {
+                const typingIndicator = document.getElementById('typingIndicator');
+                if (typingIndicator) {
+                    typingIndicator.remove();
+                }
+            }
+            
+            function getCurrentTime() {
+                const now = new Date();
+                return `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+            }
+        });
+    </script>
 </body>
 </html>
