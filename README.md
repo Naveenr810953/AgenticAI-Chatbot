@@ -10,7 +10,7 @@ A sleek and interactive web-based AI Assistant built with HTML, CSS, and JavaScr
 
 > ⚠️ **Note:** This project requires an AI API key for real-time interaction. Default implementation uses sample responses for demo purposes. 
 
-## 🎯 Features
+## 🎯 Features   
 
 - **Interactive Chat Interface** – Clean and intuitive user experience    
 - **Quick Prompts** – Easily ask common questions with a single click  
