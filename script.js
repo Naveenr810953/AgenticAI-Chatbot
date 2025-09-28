@@ -3,7 +3,9 @@ const userInput = document.getElementById('userInput');
 const sendBtn = document.getElementById('sendBtn');
 const chatMessages = document.getElementById('chatMessages');
 const quickPrompts = document.querySelectorAll('.quick-prompt');
-
+const chatMessages = document.getElementById('chatMessages');
+const quickPrompts = document.querySelectorAll('.quick-prompt');const chatMessages = document.getElementById('chatMessages');
+const quickPrompts = document.querySelectorAll('.quick-prompt');
 // Sample responses (in a real app, you'd use an API)
 const sampleResponses = {
     "weather": "The weather today is sunny with a high of 28°C. Perfect day to go outside!",
