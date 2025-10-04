@@ -179,10 +179,6 @@ Optimized for performance:
 - **Google Fonts** for font styles  
 - Inspired by modern chat UI/UX designs
 
-## 📞 Support
-
-If you have questions or issues, open a GitHub issue or contact me at **navee4147@gmail.com**.
-
 ---
 
 ⭐️ *If you like this project, please give it a star on GitHub!*
