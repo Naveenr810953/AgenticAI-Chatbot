@@ -19,7 +19,7 @@ A sleek and interactive web-based AI Assistant built with HTML, CSS, and JavaScr
 - **API Integration** – Plug in your API key for real AI-powered responses  
 - **Touch Support** – Mobile-friendly input and controls
 
-## 🕹️ How to Use
+## 🕹️ How to Use    
 
 1. Type your message in the input box and hit **Enter** or click the **send** button  
 2. Use **Quick Prompts** to auto-fill common queries  
