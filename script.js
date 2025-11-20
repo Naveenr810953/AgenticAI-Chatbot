@@ -2,7 +2,7 @@
 const userInput = document.getElementById('userInput');
 const sendBtn = document.getElementById('sendBtn');   
 const chatMessages = document.getElementById('chatMessages');
-const quickPrompts = document.querySelectorAll('.quick-prompt');
+const quickPrompts = document.querySelectorAll('.quick-prompt');    
 const chatMessages = document.getElementById('chatMessages');
 const quickPrompts = document.querySelectorAll('.quick-prompt');const chatMessages = document.getElementById('chatMessages');
 const quickPrompts = document.querySelectorAll('.quick-prompt');
