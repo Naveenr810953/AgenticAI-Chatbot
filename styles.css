@@ -9,7 +9,7 @@ body {
     scrollbar-width: thin;
     scrollbar-color: #e2e8f0 transparent;
 }
-
+  
 .chat-container::-webkit-scrollbar {
     width: 6px;
 }
