@@ -14,7 +14,7 @@ const sampleResponses = {
 };      
 
 // Quick prompt selection
-quickPrompts.forEach(prompt => {
+quickPrompts.forEach(prompt => { 
     prompt.addEventListener('click', function() {
         userInput.value = this.textContent.trim().replace(/"/g, '');
         userInput.focus();
