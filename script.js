@@ -13,7 +13,7 @@ const sampleResponses = {
     "quantum computing": "Quantum computing uses quantum bits or qubits which can exist in multiple states at once (unlike regular bits that are either 0 or 1). This allows quantum computers to solve certain problems much faster than classical computers."
 };      
 
-// Quick prompt selection 
+// Quick prompt selection  
 quickPrompts.forEach(prompt => { 
     prompt.addEventListener('click', function() {
         userInput.value = this.textContent.trim().replace(/"/g, '');
