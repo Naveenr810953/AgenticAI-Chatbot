@@ -33,7 +33,7 @@ userInput.addEventListener('keypress', function(e) {
 
 function processMessage() {
     const message = userInput.value.trim();
-    if (!message) return;
+    if (!message) return; 
 
     // Display user message
     addMessage(message, 'user');
