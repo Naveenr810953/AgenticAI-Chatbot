@@ -7,7 +7,7 @@ const chatMessages = document.getElementById('chatMessages');
 const quickPrompts = document.querySelectorAll('.quick-prompt');const chatMessages = document.getElementById('chatMessages');
 const quickPrompts = document.querySelectorAll('.quick-prompt');   
 // Sample responses (in a real app, you'd use an API)
-const sampleResponses = {
+const sampleResponses = { 
     "weather": "The weather today is sunny with a high of 28°C. Perfect day to go outside!",
     "fun fact": "Did you know honey never spoils? Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3,000 years old and still perfectly good to eat!",
     "quantum computing": "Quantum computing uses quantum bits or qubits which can exist in multiple states at once (unlike regular bits that are either 0 or 1). This allows quantum computers to solve certain problems much faster than classical computers."
