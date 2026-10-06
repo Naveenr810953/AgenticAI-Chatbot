@@ -1,5 +1,5 @@
 // DOM Elements
-const userInput = document.getElementById('userInput'); 
+const userInput = document.getElementById('userInput');    
 const sendBtn = document.getElementById('sendBtn');   
 const chatMessages = document.getElementById('chatMessages');
 const quickPrompts = document.querySelectorAll('.quick-prompt');     
