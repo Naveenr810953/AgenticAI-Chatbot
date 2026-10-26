@@ -1,4 +1,4 @@
-// DOM Elements  
+// DOM Elements   
 const userInput = document.getElementById('userInput');    
 const sendBtn = document.getElementById('sendBtn');    
 const chatMessages = document.getElementById('chatMessages');
